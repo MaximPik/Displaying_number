@@ -1,0 +1,33 @@
+<!--<html>-->
+<!--<body>-->
+<!--    <h1>Страница авторизированного пользователя</h1>-->
+<!--    <p>Рандомное число: <span id="number"></span></p>-->
+<!--    <a href="{% url 'logout' %}">Выйти</a>-->
+<!--    <script>-->
+<!--        const socket = new WebSocket('ws://' + window.location.host + '/ws/random-number/');-->
+<!--        socket.onmessage = function(event) {-->
+<!--            const data = JSON.parse(event.data);-->
+<!--            document.getElementById('number').innerText = data.number;-->
+<!--        };-->
+<!--    </script>-->
+<!--</body>-->
+<!--</html>-->
+
+<html>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div style="text-align: center;">
+            <h1 style="margin-bottom: 20px;">Страница авторизованного пользователя</h1>
+            <p>Рандомное число: <span id="number"></span></p>
+            <a href="{% url 'logout' %}" style="padding: 10px 20px; background-color: #24292e; color: white; text-decoration: none; border-radius: 5px;">Выйти</a>
+        </div>
+    </div>
+    <script>
+        const socket = new WebSocket('ws://' + window.location.host + '/ws/random-number/');
+        socket.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            document.getElementById('number').innerText = data.number;
+        };
+    </script>
+</body>
+</html>
