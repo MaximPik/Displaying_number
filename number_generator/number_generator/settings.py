@@ -12,16 +12,20 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Загрузка переменных из .env файла
+env_path = Path('.') / '.env'
+load_dotenv(dotenv_path=env_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-w--#wxx#^n+sjq063o2&)g^_66f!tv07p1e2opsmhprzcs7c5-'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'social_django',
+    'channels',
+    'django_celery_results',
     'main',
 ]
 
@@ -139,8 +145,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SITE_ID = 1
 
 # Настройки social-auth-app-django
-SOCIAL_AUTH_GITHUB_KEY = 'Ov23li3Z4S9D29zekzF9'
-SOCIAL_AUTH_GITHUB_SECRET = '885f8cbd5fa1e2a2f5972cf78eed85c5f35275da'
+SOCIAL_AUTH_GITHUB_KEY = os.getenv('SOCIAL_AUTH_GITHUB_KEY')
+SOCIAL_AUTH_GITHUB_SECRET = os.getenv('SOCIAL_AUTH_GITHUB_SECRET')
 
 # URL для перенаправления после успешной авторизации
 LOGIN_REDIRECT_URL = '/'

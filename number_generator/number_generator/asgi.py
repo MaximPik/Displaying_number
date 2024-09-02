@@ -11,15 +11,16 @@ import os
 from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
-from main.routing import websocket_urlpatterns
+from django.urls import path
+from main.consumers import RandomNumberConsumer
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'number_generator.settings')
 
 application = ProtocolTypeRouter({
-    'http': get_asgi_application(),
-    'websocket': AuthMiddlewareStack(
-        URLRouter(
-            websocket_urlpatterns
-        )
+    "http": get_asgi_application(),
+    "websocket": AuthMiddlewareStack(
+        URLRouter([
+            path('ws/random-number/', RandomNumberConsumer.as_asgi()),
+        ])
     ),
 })
