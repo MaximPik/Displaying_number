@@ -19,9 +19,7 @@ COPY ./db.sqlite3 /number_generator/db.sqlite3
 COPY ./manage.py /number_generator/manage.py
 
 RUN python -m pip install -U channels["daphne"]
-#COPY . /number_generator
 
-#ENV PYTHONPATH=/number_generator:/number_generator/main
 # Открытие порта
 EXPOSE 8080
 
